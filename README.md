@@ -35,6 +35,6 @@ flutter run --dart-define=GEMINI_MODEL=gemini-3-flash-preview --dart-define=GEMI
 
 Let's try by yourself. ☺️
 
-![Alt text](images/1.png)
-![Alt text](images/2.png)
+![Alt text](images/1.png){width=200}
+![Alt text](images/2.png){width=200}
 
