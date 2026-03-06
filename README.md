@@ -30,3 +30,11 @@ flutter run --dart-define=GEMINI_MODEL=gemini-3-flash-preview --dart-define=GEMI
 - iOS: Add `google-services.json` to `android/app/`
 
 ‼️ Ensure your app id matches with the one in the file.
+
+## How about the context?
+
+Let's try by yourself. ☺️
+
+![Alt text](images/1.png)
+![Alt text](images/2.png)
+
