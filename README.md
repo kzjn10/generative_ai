@@ -4,7 +4,7 @@
 
 # Smart convenience
 
-Generative UI chatbot for a convenience store. 
+AI-Driven Convenience Store Interface: A generative chatbot featuring a backend-orchestrated UI and dynamic content generation.
 
 ## What is this?
 
