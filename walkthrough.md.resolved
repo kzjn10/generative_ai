@@ -1,0 +1,60 @@
+# Walkthrough: Generative UI Chat Interface
+
+## What Was Built
+
+A complete Flutter chat interface for a convenience store ("Smart Convenience") that renders AI responses as dynamic UI components based on structured JSON.
+
+## Architecture
+
+```mermaid
+graph TB
+    A["main.dart<br/>MultiProvider + Theme"] --> B["ChatScreen"]
+    A --> C["CartScreen"]
+    B --> D["ChatBubble"]
+    D --> E["GenerativeUiRenderer"]
+    E --> F["ProductCard (list/grid/single)"]
+    E --> G["ComboList (horizontal scroll)"]
+    F --> H["ProductDetailBottomSheet"]
+    H --> I["CartProvider"]
+    
+    subgraph State
+        I["CartProvider"]
+        J["ChatProvider"]
+    end
+    
+    B --> J
+```
+
+**State Management**: Provider ([CartProvider](file:///Users/anhndt/Desktop/GenerativeUI/smart_convenience/lib/providers/cart_provider.dart#25-65) + [ChatProvider](file:///Users/anhndt/Desktop/GenerativeUI/smart_convenience/lib/providers/chat_provider.dart#20-67))
+**Theme**: Material 3 with 7-Eleven-inspired green (#1B7742) + orange (#E8702A) palette, Google Fonts Inter typography.
+
+## Files Created/Modified
+
+| File | Purpose |
+|------|---------|
+| [pubspec.yaml](file:///Users/anhndt/Desktop/GenerativeUI/smart_convenience/pubspec.yaml) | Added provider, shimmer, cached_network_image, google_fonts, intl |
+| [product_model.dart](file:///Users/anhndt/Desktop/GenerativeUI/smart_convenience/lib/models/product_model.dart) | [ProductModel](file:///Users/anhndt/Desktop/GenerativeUI/smart_convenience/lib/models/product_model.dart#1-40), [ComboModel](file:///Users/anhndt/Desktop/GenerativeUI/smart_convenience/lib/models/product_model.dart#41-60), [GenerativeUiResponse](file:///Users/anhndt/Desktop/GenerativeUI/smart_convenience/lib/models/product_model.dart#63-92) with JSON factories |
+| [cart_provider.dart](file:///Users/anhndt/Desktop/GenerativeUI/smart_convenience/lib/providers/cart_provider.dart) | Cart state: add/remove/decrement items, total price |
+| [chat_provider.dart](file:///Users/anhndt/Desktop/GenerativeUI/smart_convenience/lib/providers/chat_provider.dart) | Chat messages, simulated AI with 1.5s delay + random display types |
+| [mock_data.dart](file:///Users/anhndt/Desktop/GenerativeUI/smart_convenience/lib/data/mock_data.dart) | 6 products + 5 combos with Unsplash images |
+| [product_card.dart](file:///Users/anhndt/Desktop/GenerativeUI/smart_convenience/lib/widgets/product_card.dart) | Compact + featured card modes, discount badge |
+| [product_detail_bottom_sheet.dart](file:///Users/anhndt/Desktop/GenerativeUI/smart_convenience/lib/widgets/product_detail_bottom_sheet.dart) | Full details, combo selection, "Add to Cart" with dynamic pricing |
+| [combo_list.dart](file:///Users/anhndt/Desktop/GenerativeUI/smart_convenience/lib/widgets/combo_list.dart) | Horizontal scrollable gradient combo chips |
+| [generative_ui_renderer.dart](file:///Users/anhndt/Desktop/GenerativeUI/smart_convenience/lib/widgets/generative_ui_renderer.dart) | Switches between ListView, GridView, and single featured card |
+| [chat_bubble.dart](file:///Users/anhndt/Desktop/GenerativeUI/smart_convenience/lib/widgets/chat_bubble.dart) | User/bot bubbles, bot avatar, shimmer loading skeleton |
+| [chat_screen.dart](file:///Users/anhndt/Desktop/GenerativeUI/smart_convenience/lib/screens/chat_screen.dart) | Chat UI with input bar, auto-scroll, cart badge |
+| [cart_screen.dart](file:///Users/anhndt/Desktop/GenerativeUI/smart_convenience/lib/screens/cart_screen.dart) | Cart items list, quantity controls, total + checkout |
+| [main.dart](file:///Users/anhndt/Desktop/GenerativeUI/smart_convenience/lib/main.dart) | App entry with MultiProvider + M3 theme |
+
+## Verification
+
+`flutter analyze` — **0 issues found** ✅
+
+## How to Run
+
+```bash
+cd /Users/anhndt/Desktop/GenerativeUI/smart_convenience
+flutter run
+```
+
+Type any message → observe shimmer loading → see rendered products (list/grid/single randomly) → tap a card → add to cart with optional combos.
