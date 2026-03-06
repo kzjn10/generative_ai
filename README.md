@@ -37,4 +37,8 @@ Let's try by yourself. ☺️
 
 ![Alt text](images/1.png){width=200}
 ![Alt text](images/2.png){width=200}
+<img src="images/1.png" width="200" />
+<img src="images/2.png" width="400" />
+
+
 
